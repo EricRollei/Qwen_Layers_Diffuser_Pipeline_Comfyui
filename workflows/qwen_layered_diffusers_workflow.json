@@ -1,0 +1,93 @@
+{
+  "last_node_id": 5,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [100, 200],
+      "size": [280, 314],
+      "properties": {},
+      "widgets_values": ["example.png", "image"],
+      "title": "Load Source Image"
+    },
+    {
+      "id": 2,
+      "type": "EricQwenDecompose",
+      "pos": [450, 200],
+      "size": [360, 380],
+      "properties": {},
+      "widgets_values": [4, "640", "HuggingFace (Download)", "", "", 12345, 4.0, 50, false, true],
+      "title": "Qwen Layer Decompose (Diffusers)",
+      "inputs": [
+        {"name": "image", "type": "IMAGE", "link": 1}
+      ],
+      "outputs": [
+        {"name": "layers", "type": "IMAGE", "links": [2, 3], "slot_index": 0},
+        {"name": "alpha_masks", "type": "MASK", "links": [4], "slot_index": 1},
+        {"name": "layer_count", "type": "INT", "links": [], "slot_index": 2},
+        {"name": "layer_info", "type": "STRING", "links": [5], "slot_index": 3}
+      ]
+    },
+    {
+      "id": 3,
+      "type": "PreviewImage",
+      "pos": [900, 100],
+      "size": [300, 250],
+      "properties": {},
+      "title": "Preview Layers (RGBA)"
+    },
+    {
+      "id": 4,
+      "type": "EricQwenLayerSave",
+      "pos": [900, 400],
+      "size": [320, 200],
+      "properties": {},
+      "widgets_values": ["layered_output", "psd", true, "generated_layers"],
+      "title": "Save as PSD"
+    },
+    {
+      "id": 5,
+      "type": "ShowText|pysssss",
+      "pos": [900, 650],
+      "size": [320, 150],
+      "properties": {},
+      "title": "Layer Info (JSON)"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "IMAGE"],
+    [2, 2, 0, 3, 0, "IMAGE"],
+    [3, 2, 0, 4, 0, "IMAGE"],
+    [4, 2, 1, 4, 1, "MASK"],
+    [5, 2, 3, 5, 0, "STRING"]
+  ],
+  "groups": [
+    {
+      "title": "Qwen-Image-Layered Diffusers Workflow",
+      "bounding": [70, 50, 1200, 800],
+      "color": "#3f789e"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [0, 0]
+    },
+    "info": {
+      "name": "Qwen-Image-Layered Diffusers Workflow",
+      "author": "Eric Hiss (EricRollei)",
+      "description": "Simple diffusers-based workflow for Qwen-Image-Layered layer decomposition",
+      "notes": [
+        "Uses HuggingFace diffusers pipeline - handles everything internally",
+        "First run will download ~15GB model from HuggingFace",
+        "Or select a local safetensors file for the transformer",
+        "Outputs RGBA layers directly as image batch",
+        "Layer 0 is typically background, higher layers are foreground",
+        "Resolution 640 is recommended for stability, 1024 for quality"
+      ]
+    }
+  },
+  "version": 0.4
+}

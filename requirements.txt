@@ -1,0 +1,14 @@
+# Core dependencies
+torch
+numpy
+Pillow>=9.0.0
+
+# Layer file format support
+psd-tools>=1.9.0
+tifffile>=2023.0.0
+
+# Optional: For running Qwen-Image-Layered directly
+# Uncomment these if you want to run the model locally
+# diffusers>=0.32.0
+# transformers>=4.51.3
+# accelerate

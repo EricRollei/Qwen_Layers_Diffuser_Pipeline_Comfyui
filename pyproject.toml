@@ -1,0 +1,34 @@
+[project]
+name = "eric-qwen-layer"
+description = "ComfyUI nodes for Qwen-Image-Layered model with proper layer handling"
+version = "0.1.0"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Eric Hiss", email = "eric@historic.camera" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "torch",
+    "numpy",
+    "Pillow>=9.0.0",
+    "psd-tools>=1.9.0",
+    "tifffile>=2023.0.0",
+]
+
+[project.optional-dependencies]
+diffusers = [
+    "diffusers>=0.32.0",
+    "transformers>=4.51.3",
+    "accelerate",
+]
+
+[project.urls]
+Repository = "https://github.com/EricRollei/Eric_qwen_layer"
+Issues = "https://github.com/EricRollei/Eric_qwen_layer/issues"
+
+[tool.comfy]
+PublisherId = "ericrollei"
+DisplayName = "Eric Qwen Layer Nodes"
+Icon = "🎨"
