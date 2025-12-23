@@ -287,6 +287,7 @@ Copyright (c) 2025 Eric Hiss. All rights reserved.
 - [Qwen Team](https://github.com/QwenLM) for the Qwen-Image-Layered model
 - [Hugging Face](https://huggingface.co/) for the Diffusers library
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI) community
+- **Claude (Anthropic)** - AI pair programming assistant for code development and documentation
 
 ## Support
 
