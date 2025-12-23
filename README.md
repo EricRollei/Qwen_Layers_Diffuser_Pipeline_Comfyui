@@ -5,6 +5,16 @@ A ComfyUI node package for working with the **Qwen-Image-Layered** model. Decomp
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-Custom%20Nodes-blue)
 ![License](https://img.shields.io/badge/License-Dual%20(NC%2FCommercial)-orange)
 
+## Screenshots
+
+### Complete Workflow
+![Complete Workflow](workflows/complete-workflow.png)
+
+### Photoshop Layers Output
+![Photoshop Layers](workflows/Photoshop-layers-screenshot.png)
+
+---
+
 ## Features
 
 - 🎨 **Automatic Layer Decomposition** - Separate images into semantic layers (background, subjects, elements)
