@@ -84,6 +84,42 @@ def sanitize_layer_name(name: str, max_length: int = 63) -> str:
     
     return ascii_name
 
+
+def sanitize_filename(filename: str) -> str:
+    """
+    Sanitize a filename to prevent path traversal attacks.
+    
+    Removes directory separators and path traversal sequences to ensure
+    the file is created only in the intended output directory.
+    
+    Args:
+        filename: The original filename (may contain path traversal attempts)
+        
+    Returns:
+        A safe filename with no path components
+    """
+    if not filename:
+        return "output"
+    
+    # Get just the basename, removing any directory components
+    filename = os.path.basename(filename)
+    
+    # Remove any remaining path separators (paranoid check)
+    filename = filename.replace('/', '_').replace('\\', '_')
+    
+    # Remove sequences that could be problematic
+    filename = filename.replace('..', '_')
+    
+    # Remove null bytes and other control characters
+    filename = re.sub(r'[\x00-\x1f\x7f]', '', filename)
+    
+    # Ensure it's not empty after sanitization
+    if not filename or filename.strip('._ ') == '':
+        filename = "output"
+    
+    return filename
+
+
 # Check for psd-tools
 try:
     from psd_tools import PSDImage
@@ -245,13 +281,18 @@ class EricQwenLayerSave:
         
         # Get output directory
         output_dir = folder_paths.get_output_directory()
+        
+        # Sanitize subfolder to prevent path traversal
         if subfolder:
-            output_dir = os.path.join(output_dir, subfolder)
+            # Remove path traversal attempts and normalize
+            safe_subfolder = sanitize_filename(subfolder)
+            output_dir = os.path.join(output_dir, safe_subfolder)
             os.makedirs(output_dir, exist_ok=True)
         
-        # Generate unique filename
+        # Generate unique filename with sanitized prefix
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        base_filename = f"{filename_prefix}_{timestamp}"
+        safe_prefix = sanitize_filename(filename_prefix)
+        base_filename = f"{safe_prefix}_{timestamp}"
         
         # Parse layer metadata
         num_layers = layers.shape[0]
