@@ -203,6 +203,16 @@ Or keep model loaded and manually unload:
 
 5. **VRAM**: The model uses ~15GB VRAM. Use Unload Model node when switching to other workflows.
 
+### Photoshop Pro Tip: Full-Resolution Layer Extraction
+
+When you connect the `original_image` input, the PSD contains both the AI-generated layers AND your original image at full resolution. This unlocks a powerful workflow:
+
+1. **Ctrl+Click** on any Qwen layer thumbnail to load it as a selection
+2. **Select the original image layer** (bottom layer)
+3. **Ctrl+J** to copy the selected area to a new layer
+
+This gives you **full original resolution** elements with **AI-powered semantic selection**! The Qwen layers act as intelligent masks - the AI understands "these pixels are the flowers" - but you extract from the pristine original.
+
 ---
 
 ## Requirements
